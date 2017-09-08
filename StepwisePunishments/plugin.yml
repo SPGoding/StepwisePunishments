@@ -1,0 +1,13 @@
+name: StepwisePunishments
+main: com.github.spacebang.stepwisepunishments.StepwisePunishments
+version: 1.0
+commands:
+    swp:
+        description: 主命令
+        usage: |
+            §b============阶梯式惩罚插件============
+            §b/swp plus <player> <object> - 增加某玩家在某项目上的违规次数，并自动惩罚
+            §b/swp minus <player> <object> - 减少某玩家在某项目上的违规次数
+            §b/swp set <player> <object> <count> - 将某玩家在某项目上的违规次数设置为某数字
+            §b/swp punish <player> <object> - 按照某玩家在某项目上的违规次数惩罚之
+            §b/swp reload - 重新加载配置文件
