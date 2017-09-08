@@ -17,12 +17,14 @@ public class SubMinusCommand extends SubAdminCommand {
         if (this.isCorrect()) {
             // 是否有权限
             if (getSender().hasPermission("swp.minus." + getPerformance().getObject())) {
+                String releaseCmds = getPerformance().getReleaseCommands().toString();
+                getPerformance().release();
                 getPerformance().setCount(getPerformance().getCount() - 1);
                 getSender().sendMessage("§b已将玩家§6" + getPerformance().getPlayer().getName() + "§b在项目§6" 
-                        + getPerformance().getObject() + "§b中的惩罚次数设置为§6" 
+                        + getPerformance().getObject() + "§b中的惩罚次数减少为§6" 
                         + Integer.toString(getPerformance().getCount())
-                        + "§b。对应的惩罚命令是" + (getPerformance().getCommand()!=null? "§6" 
-                        + getPerformance().getCommand(): "§c无"));
+                        + "§b。解除惩罚的命令是" + (releaseCmds!=null? "§6" 
+                        + releaseCmds: "§c无") + "§b。已自动执行");
                 return true;
             } else {
                 getSender().sendMessage("§c没有§6swp.minus." + getPerformance().getObject() + "§c权限");

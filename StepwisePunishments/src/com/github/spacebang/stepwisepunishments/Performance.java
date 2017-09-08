@@ -1,5 +1,6 @@
 package com.github.spacebang.stepwisepunishments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.OfflinePlayer;
@@ -54,27 +55,60 @@ public class Performance {
     }
     
     /** 获取当前的 object 和 count 对应的惩罚命令 */
-    protected String getCommand() {
+    protected List<String> getCommands() {
+        List<String> resultCmds = new ArrayList<>();
         if (getPlugin().getConfig().contains("punishments." + this.getObject())) {
             List<String> cmds = getPlugin().getConfig().getStringList("punishments." + this.getObject());
             for (String cmd: cmds) {
-                if (Integer.parseInt(cmd.split(":")[0]) == this.getCount()) {
-                    return cmd.split(":")[1].replaceAll("\\{player\\}", getPlayer().getName());
+                String[] seperate = cmd.split(":");
+                if (Integer.parseInt(seperate[0]) == this.getCount()) {
+                    if ((seperate.length == 2) || (seperate.length == 3)) {
+                        resultCmds.add(seperate[1].replaceAll("\\{player\\}", getPlayer().getName()));
+                    }
                 }
             }
         }
-        return null;
+        return resultCmds;
     }
-
+    
+    /** 获取当前的 object 和 count 对应的撤销惩罚的命令 */
+    protected List<String> getReleaseCommands() {
+        List<String> releaseCmds = new ArrayList<>();
+        if (getPlugin().getConfig().contains("punishments." + this.getObject())) {
+            List<String> cmds = getPlugin().getConfig().getStringList("punishments." + this.getObject());
+            for (String cmd: cmds) {
+                String[] seperate = cmd.split(":");
+                if (Integer.parseInt(seperate[0]) == this.getCount()) {
+                    if (seperate.length == 3) {
+                        releaseCmds.add(seperate[2].replaceAll("\\{player\\}", getPlayer().getName()));
+                    }
+                }
+            }
+        }
+        return releaseCmds;
+    }
+    
     public Performance(OfflinePlayer player, String object, StepwisePunishments plugin) {
         setPlayer(player);
         setObject(object);
         setPlugin(plugin);
     }
     
+    /** 按照当前项目当前玩家的违规次数进行惩罚 */
     public void punish() {
-        if (getCommand() != null) {
-            getPlugin().getServer().dispatchCommand(getPlugin().getServer().getConsoleSender(), getCommand());
+        if (getCommands() != null) {
+            for (String cmd: getCommands()) {
+                getPlugin().getServer().dispatchCommand(getPlugin().getServer().getConsoleSender(), cmd);
+            }
+        }
+    }
+    
+    /** 撤销惩罚 */
+    public void release() {
+        if (getReleaseCommands() != null) {
+            for (String cmd: getReleaseCommands()) {
+                getPlugin().getServer().dispatchCommand(getPlugin().getServer().getConsoleSender(), cmd);
+            }
         }
     }
 }

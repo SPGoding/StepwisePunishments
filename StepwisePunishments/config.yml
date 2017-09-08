@@ -2,13 +2,14 @@ punishments:
   # chat是一个项目名，你可以用英文，也可以用中文起类似“骂人”“作弊”“刷屏”等名称
   chat:
     # 基本格式为
-    # - '违规次数:惩罚命令'
+    # - '违规次数:惩罚命令:撤销该惩罚的命令'
+    # 其中“撤销该惩罚的命令”是可选部分，建议写上
     # 使用{player}替代该玩家的名称
-    - '1:msg {player} 请注意不要骂人！'
-    - '2:mute {player} 1h'
-    - '3:mute {player} 1d'
-    - '4:mute {player}'
+    - '1:msg {player} 请注意不要骂人！:msg {player} 我错了冤枉你了…'
+    - '2:mute {player} 1h:mute {player}'
+    - '3:mute {player} 1d:mute {player}'
+    - '4:mute {player}:mute {player}'
   # 你可以继续建立项目，例如pvp
   pvp:
-    - '1:tempban {player} 1h 随意攻击其他玩家是不允许的行为'
-    - '2:ban {player} 你因多次攻击其他玩家，已被永久封禁'
+    - '1:tempban {player} 1h 随意攻击其他玩家是不允许的行为:unban {player}'
+    - '2:ban {player} 你因多次攻击其他玩家，已被永久封禁:unban {player}'

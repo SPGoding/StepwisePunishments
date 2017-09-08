@@ -20,8 +20,8 @@ public class SubPunishCommand extends SubAdminCommand {
                 getPerformance().punish();
                 getSender().sendMessage("§b已根据项目§6" + getPerformance().getObject() 
                         + "§b中的惩罚次数§6" + Integer.toString(getPerformance().getCount())
-                        + "§b次所对应的惩罚命令" + (getPerformance().getCommand()!=null? "§6" 
-                        + getPerformance().getCommand(): "§c无")
+                        + "§b次所对应的惩罚命令" + (getPerformance().getCommands()!=null? "§6" 
+                        + getPerformance().getCommands(): "§c无")
                         + "§b惩罚了玩家§6" + getPerformance().getPlayer().getName());
                 return true;
             } else {

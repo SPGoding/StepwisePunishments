@@ -20,10 +20,10 @@ public class SubPlusCommand extends SubAdminCommand{
                 getPerformance().setCount(getPerformance().getCount() + 1);
                 getPerformance().punish();
                 getSender().sendMessage("§b已将玩家§6" + getPerformance().getPlayer().getName() + "§b在项目§6" 
-                        + getPerformance().getObject() + "§b中的惩罚次数设置为§6" 
+                        + getPerformance().getObject() + "§b中的惩罚次数增加为§6" 
                         + Integer.toString(getPerformance().getCount())
-                        + "§b。对应的惩罚命令是" + (getPerformance().getCommand()!=null? "§6" 
-                        + getPerformance().getCommand(): "§c无") + "§b。已自动执行");
+                        + "§b。对应的惩罚命令是" + (getPerformance().getCommands()!=null? "§6" 
+                        + getPerformance().getCommands(): "§c无") + "§b。已自动执行");
                 return true;
             } else {
                 getSender().sendMessage("§c没有§6swp.plus." + getPerformance().getObject() + "§c权限");
