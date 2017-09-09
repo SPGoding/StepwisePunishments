@@ -9,11 +9,6 @@ public abstract class SubAdminCommand extends SubCommand {
             StepwisePunishments plugin) {
         super(sender, cmd, label, args, plugin);
     }
-    
-    /** 获取当前输入的命令是否符合多数 admin 子命令的规范 */
-    public boolean isCorrect() {
-        return super.isCorrect(3, "Both");
-    }
 
     /** 获取当前的 player 和 object 对应的执行类 */
     @SuppressWarnings("deprecation")

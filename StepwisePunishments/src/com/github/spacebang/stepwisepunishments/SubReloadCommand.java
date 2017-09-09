@@ -21,7 +21,7 @@ public class SubReloadCommand extends SubCommand {
             // 是否有权限
             if (getSender().hasPermission("swp.reload")) {
                 getPlugin().reloadConfig();
-                getPlugin().reloadPlayersConfig();
+                getPlugin().getPlayerCooldownMap().clear();
                 getSender().sendMessage("§b已重新加载配置文件");
                 return true;
             } else {

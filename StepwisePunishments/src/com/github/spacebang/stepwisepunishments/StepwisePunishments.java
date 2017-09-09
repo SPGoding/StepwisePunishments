@@ -2,13 +2,15 @@ package com.github.spacebang.stepwisepunishments;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /** 插件主类 */
 public final class StepwisePunishments extends JavaPlugin {
+    private Map<String, Long> playerCooldownMap = new HashMap<>();
     private FileConfiguration playersConfig;
     
     public FileConfiguration getPlayersConfig() {
@@ -19,16 +21,12 @@ public final class StepwisePunishments extends JavaPlugin {
         this.playersConfig = playersConfig;
     }
 
+    public Map<String, Long> getPlayerCooldownMap() {
+        return playerCooldownMap;
+    }
+
     public void saveDefaultPlayersConfig() {
         saveResource("players.yml", false);
-    }
-    
-    public void reloadPlayersConfig() {
-        try {
-            setPlayersConfig(YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "players.yml")));
-        } catch (Exception e) {
-            getLogger().info(e.toString());
-        }
     }
     
     @Override
@@ -46,7 +44,6 @@ public final class StepwisePunishments extends JavaPlugin {
         if (!(playersConfigFile.exists())) {
             this.saveDefaultPlayersConfig();
         }
-        this.reloadPlayersConfig();
         // 调用命令执行器
         this.getCommand("swp").setExecutor(new SwpCommandExecutor(this));
     }

@@ -39,11 +39,8 @@ public class SwpCommandExecutor implements CommandExecutor {
                 case "minus":
                     sc = new SubMinusCommand(sender, cmd, label, args, getPlugin());
                     break;
-                case "set":
-                    sc = new SubSetCommand(sender, cmd, label, args, getPlugin());
-                    break;
-                case "punish":
-                    sc = new SubPunishCommand(sender, cmd, label, args, getPlugin());
+                case "see":
+                    sc = new SubSeeCommand(sender, cmd, label, args, getPlugin());
                     break;
                 default:
                     return false;
@@ -54,6 +51,7 @@ public class SwpCommandExecutor implements CommandExecutor {
         } catch (Exception e) {
             return false;
         }
+        getPlugin().getLogger().info("9");
         return false;
     }
 }
