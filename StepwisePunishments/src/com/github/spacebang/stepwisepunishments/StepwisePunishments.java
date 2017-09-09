@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /** 插件主类 */
@@ -25,6 +26,10 @@ public final class StepwisePunishments extends JavaPlugin {
         return playerCooldownMap;
     }
 
+    public void reloadPlayersConfig() {
+        setPlayersConfig(YamlConfiguration.loadConfiguration(new File(getDataFolder(), "players.yml")));
+    }
+    
     public void saveDefaultPlayersConfig() {
         saveResource("players.yml", false);
     }
@@ -44,6 +49,7 @@ public final class StepwisePunishments extends JavaPlugin {
         if (!(playersConfigFile.exists())) {
             this.saveDefaultPlayersConfig();
         }
+        this.reloadPlayersConfig();
         // 调用命令执行器
         this.getCommand("swp").setExecutor(new SwpCommandExecutor(this));
     }
